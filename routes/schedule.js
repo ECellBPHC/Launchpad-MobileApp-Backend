@@ -6,7 +6,7 @@ const router = express.Router();
 // Define the route to handle POST requests to /schedule
 router.post('/schedule', (req, res) => {
   // Extract the parameters from the request body
-  const { name, venue, startTime, endTime, data, status } = req.body;
+  const { name, venue, startTime, endTime, date, live, upcoming, venueLink, description } = req.body;
 
   // Create a new schedule record with the extracted parameters
   const newSchedule = new scheduleSchema({
@@ -14,8 +14,11 @@ router.post('/schedule', (req, res) => {
     venue,
     startTime,
     endTime,
-    data,
-    status
+    date,
+    venueLink,
+    description,
+    live,
+    upcoming
   });
 
   // Save the new schedule record to the database
@@ -31,16 +34,53 @@ router.post('/schedule', (req, res) => {
 });
 
 router.get('/schedule', (req, res) => {
-    // Find all schedule records in the database
-    Schedule.find()
-      .then(records => {
-        // Send the schedule records to the client
-        res.status(200).json(records);
-      })
-      .catch(error => {
-        // Send an error response to the client
-        res.status(500).json({ error: error.message });
-      });
-  });
+  // Find all schedule records in the database
+  scheduleSchema.find()
+    .then(records => {
+      // Send the schedule records to the client
+      res.status(200).json(records);
+    })
+    .catch(error => {
+      // Send an error response to the client
+      res.status(500).json({ error: error.message });
+    });
+});
+
+router.get('/schedule/24', (req, res) => {
+  // Find all schedule records in the database
+  scheduleSchema.find({date: "24th Mar"})
+    .then(records => {
+      // Send the schedule records to the client
+      res.status(200).json(records);
+    })
+    .catch(error => {
+      // Send an error response to the client
+      res.status(500).json({ error: error.message });
+    });
+});
+router.get('/schedule/25', (req, res) => {
+  // Find all schedule records in the database
+  scheduleSchema.find({date: "25th Mar"})
+    .then(records => {
+      // Send the schedule records to the client
+      res.status(200).json(records);
+    })
+    .catch(error => {
+      // Send an error response to the client
+      res.status(500).json({ error: error.message });
+    });
+});
+router.get('/schedule/26', (req, res) => {
+  // Find all schedule records in the database
+  scheduleSchema.find({date: "26th Mar"})
+    .then(records => {
+      // Send the schedule records to the client
+      res.status(200).json(records);
+    })
+    .catch(error => {
+      // Send an error response to the client
+      res.status(500).json({ error: error.message });
+    });
+});
 
 module.exports = router;

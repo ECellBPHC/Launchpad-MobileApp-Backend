@@ -5,8 +5,11 @@ const scheduleSchema = new mongoose.Schema({
     venue: String,
     startTime: String,
     endTime: String,
-    data: String,
-    status: String
+    date: String,
+    description: String,
+    live: Boolean,
+    upcoming: Boolean,
+    venueLink: String
 });
 
 module.exports = mongoose.model('Schedule', scheduleSchema);
