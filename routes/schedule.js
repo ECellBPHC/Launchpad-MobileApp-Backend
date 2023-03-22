@@ -6,7 +6,7 @@ const router = express.Router();
 // Define the route to handle POST requests to /schedule
 router.post('/schedule', (req, res) => {
   // Extract the parameters from the request body
-  const { name, venue, startTime, endTime, date, live, upcoming, venueLink, description } = req.body;
+  const { name, venue, startTime, endTime, date, status, venueLink, description, image } = req.body;
 
   // Create a new schedule record with the extracted parameters
   const newSchedule = new scheduleSchema({
@@ -17,8 +17,8 @@ router.post('/schedule', (req, res) => {
     date,
     venueLink,
     description,
-    live,
-    upcoming
+    status,
+    image
   });
 
   // Save the new schedule record to the database
@@ -35,7 +35,7 @@ router.post('/schedule', (req, res) => {
 
 router.get('/schedule', (req, res) => {
   // Find all schedule records in the database
-  scheduleSchema.find()
+  scheduleSchema.find({status: "Live"})
     .then(records => {
       // Send the schedule records to the client
       res.status(200).json(records);

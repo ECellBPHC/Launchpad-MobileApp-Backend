@@ -7,9 +7,9 @@ const scheduleSchema = new mongoose.Schema({
     endTime: String,
     date: String,
     description: String,
-    live: Boolean,
-    upcoming: Boolean,
-    venueLink: String
+    status: String,
+    venueLink: String,
+    image: String
 });
 
 module.exports = mongoose.model('Schedule', scheduleSchema);
